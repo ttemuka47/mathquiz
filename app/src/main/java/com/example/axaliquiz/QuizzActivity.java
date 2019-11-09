@@ -58,36 +58,119 @@ public class QuizzActivity extends AppCompatActivity {
         mQuestionNumber = 12;
 
         updateQuestion();
-    }
 
-    private void updateQuestion() {
-        mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/0/biq");
-        mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+        finish.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                String question = dataSnapshot.getValue(String.class);
-                mQuestion.setText(question);
+            public void onClick(View v) {
 
+                Intent myIntent = new Intent(QuizzActivity.this, ResultActivity.class);
+                myIntent.putExtra("Username", score.getText().toString());
 
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
+                startActivity(myIntent);
 
             }
         });
-        if(mQuestionNumber > 10){
 
-            mQuestionNumber--;
-
+    }
 
 
-        }
-        else {
-            mQuestionNumber++;
+
+        private void updateQuestion() {
+            mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/0/biq");
+            mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    String question = dataSnapshot.getValue(String.class);
+                    mQuestion.setText(question);
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+
+            mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi1");
+            mchoice1Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    String choice1 = dataSnapshot.getValue(String.class);
+                    mButtonChoice1.setText(choice1);
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+            mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi2");
+            mchoice2Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    String choice2 = dataSnapshot.getValue(String.class);
+                    mButtonChoice2.setText(choice2);
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+            mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi3");
+            mchoice3Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    String choice3 = dataSnapshot.getValue(String.class);
+                    mButtonChoice3.setText(choice3);
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+
+            mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi4");
+            mchoice4Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                @Override
+                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                    String choice4 = dataSnapshot.getValue(String.class);
+                    mButtonChoice4.setText(choice4);
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+
+            if (mQuestionNumber > 10) {
+
+                /* quitFunction();*/
+
+
+            } else {
+                mQuestionNumber++;
+            }
         }
     }
-}
+
+
 
 
 

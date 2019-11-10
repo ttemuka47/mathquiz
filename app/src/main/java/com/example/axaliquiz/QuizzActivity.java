@@ -54,10 +54,101 @@ public class QuizzActivity extends AppCompatActivity {
         finish = (Button) findViewById(R.id.finish);
         timer = (TextView) findViewById(R.id.timer);
         final TextView score = (TextView) findViewById(R.id.score);
+        score.setText("ქულა " + mScore + "/30");
 
-        mQuestionNumber = 12;
+        mQuestionNumber = 0;
 
         updateQuestion();
+
+
+        mButtonChoice1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mButtonChoice1.getText().equals(mAnswer)) {
+                    mScore++;
+                    score.setText("ქულა " + mScore + "/30");
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+            }
+        });
+        mButtonChoice2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mButtonChoice2.getText().equals(mAnswer))  {
+                    mScore++;
+                    score.setText("ქულა " + mScore + "/30");
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+            }
+        });
+
+        mButtonChoice3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mButtonChoice3.getText().equals(mAnswer))  {
+                    mScore++;
+                    score.setText("ქულა " + mScore + "/30");
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+            }
+        });
+
+        mButtonChoice4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mButtonChoice4.getText().equals(mAnswer))  {
+                    mScore++;
+                    score.setText("ქულა " + mScore + "/30");
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+
+                    updateQuestion();
+                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+            }
+        });
+
 
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,104 +162,137 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
-    }
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateQuestion();
 
 
-
-        private void updateQuestion() {
-            mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/0/biq");
-            mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                @Override
-                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                    String question = dataSnapshot.getValue(String.class);
-                    mQuestion.setText(question);
-
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-
-            mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi1");
-            mchoice1Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                @Override
-                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                    String choice1 = dataSnapshot.getValue(String.class);
-                    mButtonChoice1.setText(choice1);
-
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-            mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi2");
-            mchoice2Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                @Override
-                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                    String choice2 = dataSnapshot.getValue(String.class);
-                    mButtonChoice2.setText(choice2);
-
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-            mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi3");
-            mchoice3Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                @Override
-                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                    String choice3 = dataSnapshot.getValue(String.class);
-                    mButtonChoice3.setText(choice3);
-
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-
-            mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/0/bi4");
-            mchoice4Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                @Override
-                public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                    String choice4 = dataSnapshot.getValue(String.class);
-                    mButtonChoice4.setText(choice4);
-
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-
-            if (mQuestionNumber > 10) {
-
-                /* quitFunction();*/
-
-
-            } else {
-                mQuestionNumber++;
             }
-        }
+        });
+
+
+
     }
+
+
+    private void updateQuestion() {
+        mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/biq");
+        mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String question = dataSnapshot.getValue(String.class);
+                mQuestion.setText(question);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
+        mAnswerRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bia");
+        mAnswerRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                mAnswer = dataSnapshot.getValue(String.class);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
+        mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi1");
+        mchoice1Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String choice1 = dataSnapshot.getValue(String.class);
+                mButtonChoice1.setText(choice1);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi2");
+        mchoice2Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String choice2 = dataSnapshot.getValue(String.class);
+                mButtonChoice2.setText(choice2);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi3");
+        mchoice3Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String choice3 = dataSnapshot.getValue(String.class);
+                mButtonChoice3.setText(choice3);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+
+        mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi4");
+        mchoice4Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
+            @Override
+            public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
+                String choice4 = dataSnapshot.getValue(String.class);
+                mButtonChoice4.setText(choice4);
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        mQuestionNumber++;
+       /* if (mQuestionNumber < 5) {
+
+             quitFunction();
+            mQuestionNumber++;
+
+
+
+        } else {
+
+        }*/
+    }
+
+
+
+}
+
 
 
 

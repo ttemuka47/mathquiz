@@ -40,10 +40,9 @@
     </RelativeLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:text=" "
-        android:textSize="20sp"
         android:padding="8dp"
         android:layout_marginBottom="40dp"
         android:id="@+id/question"/>
@@ -52,7 +51,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="bird"
+        android:text=""
         android:background="#0091EA"
         android:textColor="#fff"
         android:padding="8dp"
@@ -62,7 +61,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="door"
+        android:text=""
         android:background="#0091EA"
         android:textColor="#fff"
         android:padding="8dp"
@@ -72,7 +71,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="rock"
+        android:text=""
         android:background="#0091EA"
         android:textColor="#fff"
         android:padding="8dp"
@@ -82,31 +81,32 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="rock"
+        android:text=""
         android:background="#0091EA"
         android:textColor="#fff"
         android:padding="8dp"
         android:layout_marginBottom="24dp"
         android:id="@+id/choice4"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="quit"
-        android:background="#B71C1C"
-        android:textColor="#fff"
-        android:padding="8dp"
-        android:layout_marginBottom="24dp"
-        android:id="@+id/finish"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NExt"
-        android:background="#B71C1C"
-        android:textColor="#fff"
-        android:padding="8dp"
-        android:layout_marginBottom="24dp"
-        android:id="@+id/next"/>
+        <Button
+
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="დასრულება" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="შემდეგი" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,5 +1,4 @@
 package com.example.axaliquiz;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,8 +19,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.Random;
+public class Chemistry extends AppCompatActivity{
 
-public class QuizzActivity extends AppCompatActivity {
     private TextView mScoreView;
     private TextView mQuestion;
     private Button mButtonChoice1;
@@ -77,7 +76,7 @@ public class QuizzActivity extends AppCompatActivity {
 
                 if (mButtonChoice1.getText().equals(mAnswer)) {
                     mButtonChoice1.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -101,7 +100,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice1.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -133,7 +132,7 @@ public class QuizzActivity extends AppCompatActivity {
                 next.setClickable(false);
                 if (mButtonChoice2.getText().equals(mAnswer)) {
                     mButtonChoice2.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -155,7 +154,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice2.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -184,7 +183,7 @@ public class QuizzActivity extends AppCompatActivity {
                 next.setClickable(false);
                 if (mButtonChoice3.getText().equals(mAnswer)) {
                     mButtonChoice3.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -206,7 +205,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice3.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -235,7 +234,7 @@ public class QuizzActivity extends AppCompatActivity {
                 next.setClickable(false);
                 if (mButtonChoice4.getText().equals(mAnswer)) {
                     mButtonChoice4.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -257,7 +256,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice4.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(QuizzActivity.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Chemistry.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -306,7 +305,7 @@ public class QuizzActivity extends AppCompatActivity {
 
 
     private void updateQuestion() {
-        mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/biq");
+        mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimiaq");
         mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -323,7 +322,7 @@ public class QuizzActivity extends AppCompatActivity {
         });
 
 
-        mAnswerRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bia");
+        mAnswerRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimiaanswer");
         mAnswerRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -339,7 +338,7 @@ public class QuizzActivity extends AppCompatActivity {
         });
 
 
-        mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi1");
+        mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimia1");
         mchoice1Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -355,7 +354,7 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
-        mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi2");
+        mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimia2");
         mchoice2Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -371,7 +370,7 @@ public class QuizzActivity extends AppCompatActivity {
             }
         });
 
-        mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi3");
+        mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimia3");
         mchoice3Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -388,7 +387,7 @@ public class QuizzActivity extends AppCompatActivity {
         });
 
 
-        mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/bi4");
+        mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimia4");
         mchoice4Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -421,7 +420,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     private void quitFunction() {
 
-        Intent myIntent = new Intent(QuizzActivity.this, ResultActivity.class);
+        Intent myIntent = new Intent(Chemistry.this, ResultActivity.class);
         startActivity(myIntent);
 
     }
@@ -451,7 +450,7 @@ public class QuizzActivity extends AppCompatActivity {
 
 
     private void gameOver() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizzActivity.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Chemistry.this);
         alertDialogBuilder
                 .setMessage("თქვენ დააგროვეთ " + mScore + " სწორი პასუხი")
                 .setCancelable(false)
@@ -459,7 +458,7 @@ public class QuizzActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                startActivity(new Intent(getApplicationContext(), QuizzActivity.class));
+                                startActivity(new Intent(getApplicationContext(), Chemistry.class));
 
                             }
                         })

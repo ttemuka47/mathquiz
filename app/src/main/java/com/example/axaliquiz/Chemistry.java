@@ -8,6 +8,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,12 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.Random;
 public class Chemistry extends AppCompatActivity{
@@ -29,7 +36,7 @@ public class Chemistry extends AppCompatActivity{
     private Button mButtonChoice4;
     private Button next;
     private Button finish;
-
+    private InterstitialAd mInterstitialAd;
     private String mAnswer;
     private int mScore;
     private int mQuestionNumber;
@@ -59,6 +66,27 @@ public class Chemistry extends AppCompatActivity{
         timer = (TextView) findViewById(R.id.timer);
         final TextView score = (TextView) findViewById(R.id.score);
         score.setText(mScore + "/30");
+
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/8691691433");
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                /* startQuizz(); */
+                mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+            }
+
+        });
 
         mQuestionNumber = 0;
 
@@ -281,6 +309,8 @@ public class Chemistry extends AppCompatActivity{
             public void onClick(View v) {
                 gameOver();
 
+
+
                 /*Intent myIntent = new Intent(QuizzActivity.this, ResultActivity.class);
                 myIntent.putExtra("Username", score.getText().toString());
 
@@ -450,6 +480,12 @@ public class Chemistry extends AppCompatActivity{
 
 
     private void gameOver() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Chemistry.this);
         alertDialogBuilder
                 .setMessage("თქვენ დააგროვეთ " + mScore + " სწორი პასუხი")

@@ -9,10 +9,18 @@ import android.os.Handler;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -35,6 +43,8 @@ public class QuizzActivity extends AppCompatActivity {
     private int mScore;
     private int mQuestionNumber;
     TextView timer;
+
+    private InterstitialAd mInterstitialAd;
 
     private Firebase mQuestionRef, mchoice1Ref, mchoice2Ref, mchoice3Ref, mchoice4Ref, mAnswerRef;
     Random r;
@@ -60,6 +70,26 @@ public class QuizzActivity extends AppCompatActivity {
         timer = (TextView) findViewById(R.id.timer);
         final TextView score = (TextView) findViewById(R.id.score);
         score.setText(mScore + "/30");
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/8691691433");
+        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                /* startQuizz(); */
+                mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+            }
+
+        });
 
         mQuestionNumber = 0;
 
@@ -451,6 +481,12 @@ public class QuizzActivity extends AppCompatActivity {
 
 
     private void gameOver() {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuizzActivity.this);
         alertDialogBuilder
                 .setMessage("თქვენ დააგროვეთ " + mScore + " სწორი პასუხი")

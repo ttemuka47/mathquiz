@@ -3,31 +3,30 @@ package com.example.axaliquiz;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.DataSnapshot;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.Random;
 
-public class Geography extends AppCompatActivity{
+public class English  extends AppCompatActivity {
     private TextView mScoreView;
     private TextView mQuestion;
     private Button mButtonChoice1;
@@ -104,7 +103,7 @@ public class Geography extends AppCompatActivity{
 
                 if (mButtonChoice1.getText().equals(mAnswer)) {
                     mButtonChoice1.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(Geography.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -128,7 +127,7 @@ public class Geography extends AppCompatActivity{
                     mButtonChoice1.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(Geography.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -160,7 +159,7 @@ public class Geography extends AppCompatActivity{
                 next.setClickable(false);
                 if (mButtonChoice2.getText().equals(mAnswer)) {
                     mButtonChoice2.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(Geography.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -182,7 +181,7 @@ public class Geography extends AppCompatActivity{
                     mButtonChoice2.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(Geography.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -211,7 +210,7 @@ public class Geography extends AppCompatActivity{
                 next.setClickable(false);
                 if (mButtonChoice3.getText().equals(mAnswer)) {
                     mButtonChoice3.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(Geography.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -233,7 +232,7 @@ public class Geography extends AppCompatActivity{
                     mButtonChoice3.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(Geography.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -262,7 +261,7 @@ public class Geography extends AppCompatActivity{
                 next.setClickable(false);
                 if (mButtonChoice4.getText().equals(mAnswer)) {
                     mButtonChoice4.setBackgroundColor(Color.GREEN);
-                    Toast.makeText(Geography.this, "სწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText(mScore + "/30");
                     Handler handler = new Handler();
@@ -284,7 +283,7 @@ public class Geography extends AppCompatActivity{
                     mButtonChoice4.setBackgroundColor(Color.RED);
 
 
-                    Toast.makeText(Geography.this, "არასწორია!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(English.this, "არასწორია!", Toast.LENGTH_SHORT).show();
 
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -335,7 +334,7 @@ public class Geography extends AppCompatActivity{
 
 
     private void updateQuestion() {
-        mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/question");
+        mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/engquestion");
         mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -352,7 +351,7 @@ public class Geography extends AppCompatActivity{
         });
 
 
-        mAnswerRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/answer");
+        mAnswerRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/enganswer");
         mAnswerRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -368,7 +367,7 @@ public class Geography extends AppCompatActivity{
         });
 
 
-        mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/choice1");
+        mchoice1Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/eng1");
         mchoice1Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -384,7 +383,7 @@ public class Geography extends AppCompatActivity{
             }
         });
 
-        mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/choice2");
+        mchoice2Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/eng2");
         mchoice2Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -400,7 +399,7 @@ public class Geography extends AppCompatActivity{
             }
         });
 
-        mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/choice3");
+        mchoice3Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/eng3");
         mchoice3Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -417,7 +416,7 @@ public class Geography extends AppCompatActivity{
         });
 
 
-        mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/choice4");
+        mchoice4Ref = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/eng4");
         mchoice4Ref.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
             public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
@@ -450,7 +449,7 @@ public class Geography extends AppCompatActivity{
 
     private void quitFunction() {
 
-        Intent myIntent = new Intent(Geography.this, ResultActivity.class);
+        Intent myIntent = new Intent(English.this, ResultActivity.class);
         startActivity(myIntent);
 
     }
@@ -486,7 +485,7 @@ public class Geography extends AppCompatActivity{
             Log.d("TAG", "The interstitial wasn't loaded yet.");
         }
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Geography.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(English.this);
         alertDialogBuilder
                 .setMessage("თქვენ დააგროვეთ " + mScore + " სწორი პასუხი")
                 .setCancelable(false)

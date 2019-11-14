@@ -27,6 +27,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class QuizzActivity extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class QuizzActivity extends AppCompatActivity {
     private Button mButtonChoice4;
     private Button next;
     private Button finish;
+    private ArrayList<Integer> mylist;
 
     private String mAnswer;
     private int mScore;
@@ -55,6 +57,11 @@ public class QuizzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizz);
 
+        r = new Random();
+
+        mylist = new ArrayList<>();
+
+
         mScoreView = (TextView) findViewById(R.id.score);
         mQuestion = (TextView) findViewById(R.id.question);
         timer = (TextView) findViewById(R.id.timer);
@@ -69,7 +76,7 @@ public class QuizzActivity extends AppCompatActivity {
         finish = (Button) findViewById(R.id.finish);
         timer = (TextView) findViewById(R.id.timer);
         final TextView score = (TextView) findViewById(R.id.score);
-        score.setText(mScore + "/30");
+        score.setText(mQuestionNumber + "qula" + mScore + "/30");
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -91,7 +98,7 @@ public class QuizzActivity extends AppCompatActivity {
 
         });
 
-        mQuestionNumber = 0;
+
 
         updateQuestion();
 
@@ -109,7 +116,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice1.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mScore + "/30");
+                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -165,7 +172,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice2.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mScore + "/30");
+                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -216,7 +223,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice3.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mScore + "/30");
+                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -267,7 +274,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice4.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mScore + "/30");
+                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -336,6 +343,32 @@ public class QuizzActivity extends AppCompatActivity {
 
 
     private void updateQuestion() {
+        mQuestionNumber = r.nextInt(30);
+
+        mylist.add(mQuestionNumber);
+
+        if(mylist.size()<31){
+            mQuestionNumber = r.nextInt(30);
+
+        }
+        else{
+            gameOver();
+        }
+
+
+
+        /* mQuestionNumber++;
+        if (mQuestionNumber < 10) {
+
+            mQuestionNumber++;
+
+        } else {
+            gameOver();
+        }
+
+
+         */
+
         mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/biq");
         mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -439,14 +472,9 @@ public class QuizzActivity extends AppCompatActivity {
         mButtonChoice3.setClickable(true);
         mButtonChoice4.setClickable(true);
         next.setClickable(true);
-        /* mQuestionNumber++;*/
-        if (mQuestionNumber < 10) {
 
-            mQuestionNumber++;
 
-        } else {
-            gameOver();
-        }
+
     }
 
     private void quitFunction() {

@@ -25,6 +25,8 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 public class Chemistry extends AppCompatActivity{
 
@@ -41,6 +43,9 @@ public class Chemistry extends AppCompatActivity{
     private int mScore;
     private int mQuestionNumber;
     TextView timer;
+    private int i;
+
+    private ArrayList<Integer> mylist;
 
     private Firebase mQuestionRef, mchoice1Ref, mchoice2Ref, mchoice3Ref, mchoice4Ref, mAnswerRef;
     Random r;
@@ -66,6 +71,43 @@ public class Chemistry extends AppCompatActivity{
         timer = (TextView) findViewById(R.id.timer);
         final TextView score = (TextView) findViewById(R.id.score);
         score.setText(mScore + "/30");
+
+        r = new Random();
+        i = 0;
+
+        mylist = new ArrayList<>();
+        mylist.add(0);
+        mylist.add(1);
+        mylist.add(2);
+        mylist.add(3);
+        mylist.add(4);
+        mylist.add(5);
+        mylist.add(6);
+        mylist.add(7);
+        mylist.add(8);
+        mylist.add(9);
+        mylist.add(10);
+        mylist.add(11);
+        mylist.add(12);
+        mylist.add(13);
+        mylist.add(14);
+        mylist.add(15);
+        mylist.add(16);
+        mylist.add(17);
+        mylist.add(18);
+        mylist.add(19);
+        mylist.add(20);
+        mylist.add(21);
+        mylist.add(22);
+        mylist.add(23);
+        mylist.add(24);
+        mylist.add(25);
+        mylist.add(26);
+        mylist.add(27);
+        mylist.add(28);
+        mylist.add(29);
+
+        Collections.shuffle(mylist);
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -335,6 +377,19 @@ public class Chemistry extends AppCompatActivity{
 
 
     private void updateQuestion() {
+
+        mQuestionNumber = mylist.get(i);
+
+
+        if(mQuestionNumber == mylist.get(29)){
+            gameOver();
+
+        }
+         else{
+          i++;
+        }
+
+
         mQuestionRef = new Firebase("https://fir-a8505.firebaseio.com/"+ mQuestionNumber +"/qimiaq");
         mQuestionRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
             @Override
@@ -439,13 +494,7 @@ public class Chemistry extends AppCompatActivity{
         mButtonChoice4.setClickable(true);
         next.setClickable(true);
         /* mQuestionNumber++;*/
-        if (mQuestionNumber < 10) {
 
-            mQuestionNumber++;
-
-        } else {
-            gameOver();
-        }
     }
 
     private void quitFunction() {

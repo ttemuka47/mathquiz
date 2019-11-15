@@ -28,6 +28,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class QuizzActivity extends AppCompatActivity {
@@ -50,7 +51,7 @@ public class QuizzActivity extends AppCompatActivity {
 
     private Firebase mQuestionRef, mchoice1Ref, mchoice2Ref, mchoice3Ref, mchoice4Ref, mAnswerRef;
     Random r;
-
+    private int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,43 @@ public class QuizzActivity extends AppCompatActivity {
 
         r = new Random();
 
+        i = 0;
+
         mylist = new ArrayList<>();
+        mylist.add(0);
+        mylist.add(1);
+        mylist.add(2);
+        mylist.add(3);
+        mylist.add(4);
+        mylist.add(5);
+        mylist.add(6);
+        mylist.add(7);
+        mylist.add(8);
+        mylist.add(9);
+        mylist.add(10);
+        mylist.add(11);
+        mylist.add(12);
+        mylist.add(13);
+        mylist.add(14);
+        mylist.add(15);
+        mylist.add(16);
+        mylist.add(17);
+        mylist.add(18);
+        mylist.add(19);
+        mylist.add(20);
+        mylist.add(21);
+        mylist.add(22);
+        mylist.add(23);
+        mylist.add(24);
+        mylist.add(25);
+        mylist.add(26);
+        mylist.add(27);
+        mylist.add(28);
+        mylist.add(29);
+
+        Collections.shuffle(mylist);
+
+
 
 
         mScoreView = (TextView) findViewById(R.id.score);
@@ -76,7 +113,7 @@ public class QuizzActivity extends AppCompatActivity {
         finish = (Button) findViewById(R.id.finish);
         timer = (TextView) findViewById(R.id.timer);
         final TextView score = (TextView) findViewById(R.id.score);
-        score.setText(mQuestionNumber + "qula" + mScore + "/30");
+        score.setText(mScore + "/30");
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -116,7 +153,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice1.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
+                    score.setText(mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -172,7 +209,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice2.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
+                    score.setText(mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -223,7 +260,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice3.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
+                    score.setText(mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -274,7 +311,7 @@ public class QuizzActivity extends AppCompatActivity {
                     mButtonChoice4.setBackgroundColor(Color.GREEN);
                     Toast.makeText(QuizzActivity.this, "სწორია!", Toast.LENGTH_SHORT).show();
                     mScore++;
-                    score.setText(mQuestionNumber + "qula" + mScore + "/30");
+                    score.setText(mScore + "/30");
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -343,17 +380,17 @@ public class QuizzActivity extends AppCompatActivity {
 
 
     private void updateQuestion() {
-        mQuestionNumber = r.nextInt(30);
+        mQuestionNumber = mylist.get(i);
 
-        mylist.add(mQuestionNumber);
 
-        if(mylist.size()<31){
-            mQuestionNumber = r.nextInt(30);
+        if(mQuestionNumber == mylist.get(29)){
+            gameOver();
 
         }
         else{
-            gameOver();
+            i++;
         }
+
 
 
 

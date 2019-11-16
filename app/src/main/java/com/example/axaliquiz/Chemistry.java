@@ -106,6 +106,7 @@ public class Chemistry extends AppCompatActivity{
         mylist.add(27);
         mylist.add(28);
         mylist.add(29);
+        mylist.add(6);
 
         Collections.shuffle(mylist);
 
@@ -381,7 +382,7 @@ public class Chemistry extends AppCompatActivity{
         mQuestionNumber = mylist.get(i);
 
 
-        if(mQuestionNumber == mylist.get(29)){
+        if(mQuestionNumber == mylist.get(30)){
             gameOver();
 
         }

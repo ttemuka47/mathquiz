@@ -103,6 +103,24 @@ public class Geography extends AppCompatActivity{
         mylist.add(27);
         mylist.add(28);
         mylist.add(29);
+        mylist.add(30);
+        mylist.add(31);
+        mylist.add(32);
+        mylist.add(33);
+        mylist.add(34);
+        mylist.add(35);
+        mylist.add(36);
+        mylist.add(37);
+        mylist.add(38);
+        mylist.add(39);
+        mylist.add(40);
+        mylist.add(41);
+        mylist.add(42);
+        mylist.add(43);
+        mylist.add(44);
+        mylist.add(45);
+        mylist.add(46);
+
 
         Collections.shuffle(mylist);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -376,7 +394,7 @@ public class Geography extends AppCompatActivity{
         mQuestionNumber = mylist.get(i);
 
 
-        if(mQuestionNumber == mylist.get(29)){
+        if(mQuestionNumber == mylist.get(30)){
             gameOver();
 
         }
